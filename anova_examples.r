@@ -2,6 +2,7 @@ library(psych)
 dataset <- read.csv("data/software_cost_projects.csv", header = TRUE)
 dataset$ln_effort <- log(dataset$effort)
 
+# t01, t07, t08, t09, t10, t11, t14, t15
 #Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 anova_result <- aov(log(effort) ~ t01, data = dataset)
@@ -71,7 +72,7 @@ anova_result <- aov(log(effort) ~ t07, data = dataset)
 print(summary(anova_result))
 
 #            Df Sum Sq Mean Sq F value   Pr(>F)    
-#t07          4  20.97   5.242   6.606 0.000188 ***
+#t07          4  20.97   5.242   6.606 0.000188 *** -> post hoc
 #Residuals   58  46.02   0.793 
 
 # Perform ANOVA
@@ -155,3 +156,25 @@ print(describeBy(dataset$effort, dataset$t15))
 #            Df Sum Sq Mean Sq F value Pr(>F)  
 #t15          4   8.90   2.226   2.223 0.0776 .
 #Residuals   58  58.08   1.001  
+
+# Perform ANOVA
+anova_result <- aov(log(effort) ~ app, data = dataset)
+
+# Print the ANOVA table
+print(summary(anova_result))
+#print(describeBy(dataset$effort, dataset$app))
+
+#            Df Sum Sq Mean Sq F value Pr(>F)
+#app          4   7.85   1.963   1.926  0.118
+#Residuals   58  59.13   1.020       
+
+# Perform ANOVA
+anova_result <- aov(log(effort) ~ har, data = dataset)
+
+# Print the ANOVA table
+print(summary(anova_result))
+#print(describeBy(dataset$effort, dataset$har))
+
+#            Df Sum Sq Mean Sq F value Pr(>F)  
+#har          4  11.12  2.7793   2.885 0.0301 *
+#Residuals   58  55.87  0.9633  
