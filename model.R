@@ -1,4 +1,4 @@
-dataset <- read.csv("/Users/Dimitris/Downloads/software_cost_projects.csv", header = TRUE)
+dataset <- read.csv("/home/dimitris/Downloads/software_cost_projects.csv", header = TRUE)
 dataset$effort <- log(dataset$effort)
 dataset$size <- log(dataset$size)
 dataset$t01 <- factor(dataset$t01, levels = c("very low", "low", "medium", "high", "very high"))
@@ -31,12 +31,10 @@ model_1 <- lm(effort ~ size + t01 + t07
 # Display a summary of the regression results
 print(summary(model_1))
 
-#model_2 <- lm(effort ~ size + t01 + t07 
-#              + t08 + t10 + t11 + t14 
-#              + har, data = dataset)
+model_2 <- lm(effort ~ t01 + t07 + t08 + t10 + har, data = dataset)
 
 # Display a summary of the regression results
-#print(summary(model_2))
+print(summary(model_2))
 
 model_3 <- lm(effort ~ size + t01 + t02 + t03 
               + t04 + t05 + t06 + t07 + t08 
@@ -56,8 +54,8 @@ print(summary(model_3))
 # t10  : explains 0.121  of the model, p-value: 0.0533 
 # t11  : explains 0.1637 of the model, better than null model
 
-anova(model_1, model_3)
-
-# model_1 RSS 11.554
-# model_2 RSS 19.399 
-
+anova(model_1, model_2)
+# model_1 RSS 11.554 (Μοντέλο με μικρότερο RSS έχει καλύτερη προσαρμογή)
+# μοδελ_2 RSS 30.433
+# pvalue 9.395e-06 < 0.05 αρα Η προσαρμογή του Μοντέλου 1 παρουσιάζει στατιστικά σημαντική
+#διαφορά σε σχέση με την προσαρμογή του Μοντέλου 2.
