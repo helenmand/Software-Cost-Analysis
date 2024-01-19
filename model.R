@@ -18,15 +18,20 @@ dataset$t14 <- factor(dataset$t14, levels = c("very low", "low", "medium", "high
 dataset$t15 <- factor(dataset$t15, levels = c("very low", "low", "medium", "high", "very high"))
 dataset$har <- factor(dataset$har, levels = c("PC", "Mainfrm", "Multi", "Mini", "Network"))
 
+# Models with 1 independent variable
+# size : explains 0.6958 of the model, better than null model
+# Το size 
+# t07  : explains 0.1818 of the model, better than null model
+# t11  : explains 0.1637 of the model, better than null model
+
 
 model_1 <- lm(effort ~ size + t01 + t07 
               + t08 + t10 + t11 + t14 
               + har, data = dataset)
-# Το Μοντέλο 1 εξηγεί το 82.75% της μεταβλητότητας της εξαρτημένης μεταβλητής (log(effort)) 
-# Το μοντέλο επίσης βελτιώνει σημαντικά την προβλεπτική ικανότητα σε σχέση με το χείριστο 
-# μοντέλο (p-value: 1.869e-07 < 0.05)
-# size (𝑏1 = 0.67412) → Αύξηση της ανεξάρτητης μεταβλητής κατά μία μονάδα 
-#log(size) θα επιφέρει αύξηση της εξαρτημένης μεταβλητής log(effort) κατά 0.67412 μονάδες
+Model 1 explains 82.75% of the variability in the dependent variable (log(effort)).
+#The model also significantly improves predictive ability compared to the worst model (p-value: 1.869e-07 < 0.05).
+#Variable "size" (𝑏1 = 0.67412) indicates that a one-unit increase in the independent variable log(size)
+#will result in a 0.67412-unit increase in the dependent variable log(effort).
 
 # Display a summary of the regression results
 print(summary(model_1))
@@ -45,17 +50,9 @@ model_3 <- lm(effort ~ size + t01 + t02 + t03
 # Display a summary of the regression results
 print(summary(model_3))
 
-#Το μοντέλο 3 δεν βελτιώνει την προβλεπτική ικανότητα απο ενα χείριστο μοντέλο (p-value: 0.1925)
-
-# Κάποια μόνα τους.
-# size : explains 0.6958 of the model, better than null model
-# Το size 
-# t07  : explains 0.1818 of the model, better than null model
-# t10  : explains 0.121  of the model, p-value: 0.0533 
-# t11  : explains 0.1637 of the model, better than null model
+#model_3 does not enhance predictive capability compared to a worst-case scenario model (p-value: 0.1925).
 
 anova(model_1, model_2)
-# model_1 RSS 11.554 (Μοντέλο με μικρότερο RSS έχει καλύτερη προσαρμογή)
-# μοδελ_2 RSS 30.433
-# pvalue 9.395e-06 < 0.05 αρα Η προσαρμογή του Μοντέλου 1 παρουσιάζει στατιστικά σημαντική
-#διαφορά σε σχέση με την προσαρμογή του Μοντέλου 2.
+#Model_1 has a Residual Sum of Squares (RSS) of 11.554 (A model with a smaller RSS indicates a better fit).
+#Model_2 has an RSS of 30.433. 
+#The p-value is 9.395e-06 <= 0.05 which indicates that the fit of Model_1 is statistically significantly different from that of Model_2.
