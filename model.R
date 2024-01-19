@@ -22,14 +22,21 @@ dataset$har <- factor(dataset$har, levels = c("PC", "Mainfrm", "Multi", "Mini", 
 model_1 <- lm(effort ~ size + t01 + t07 
               + t08 + t10 + t11 + t14 
               + har, data = dataset)
+# Το Μοντέλο 1 εξηγεί το 82.75% της μεταβλητότητας της εξαρτημένης μεταβλητής (log(effort)) 
+# Το μοντέλο επίσης βελτιώνει σημαντικά την προβλεπτική ικανότητα σε σχέση με το χείριστο 
+# μοντέλο (p-value: 1.869e-07 < 0.05)
+# size (𝑏1 = 0.67412) → Αύξηση της ανεξάρτητης μεταβλητής κατά μία μονάδα 
+#log(size) θα επιφέρει αύξηση της εξαρτημένης μεταβλητής log(effort) κατά 0.67412 μονάδες
 
 # Display a summary of the regression results
 print(summary(model_1))
 
-model_2 <- lm(effort ~ size + t07 + t11 + har , data = dataset)
+#model_2 <- lm(effort ~ size + t01 + t07 
+#              + t08 + t10 + t11 + t14 
+#              + har, data = dataset)
 
 # Display a summary of the regression results
-print(summary(model_2))
+#print(summary(model_2))
 
 model_3 <- lm(effort ~ size + t01 + t02 + t03 
               + t04 + t05 + t06 + t07 + t08 
@@ -40,10 +47,17 @@ model_3 <- lm(effort ~ size + t01 + t02 + t03
 # Display a summary of the regression results
 print(summary(model_3))
 
+#Το μοντέλο 3 δεν βελτιώνει την προβλεπτική ικανότητα απο ενα χείριστο μοντέλο (p-value: 0.1925)
+
+# Κάποια μόνα τους.
 # size : explains 0.6958 of the model, better than null model
+# Το size 
 # t07  : explains 0.1818 of the model, better than null model
 # t10  : explains 0.121  of the model, p-value: 0.0533 
 # t11  : explains 0.1637 of the model, better than null model
 
-anova(model_1, model_2)
+anova(model_1, model_3)
+
+# model_1 RSS 11.554
+# model_2 RSS 19.399 
 
