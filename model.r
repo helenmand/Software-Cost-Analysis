@@ -35,7 +35,7 @@ model_1 <- lm(effort ~ size + t01 + t07
 #will result in a 0.67412-unit increase in the dependent variable log(effort).
 
 # Display a summary of the regression results
-#print(summary(model_1))
+print(summary(model_1))
 
 model_2 <- lm(effort ~ t01 + t07 + t08 + t10 + har, data = dataset)
 
@@ -49,12 +49,10 @@ model_3 <- lm(effort ~ size + t01 + t02 + t03
 
 
 # Display a summary of the regression results
-#print(summary(model_3))
+print(summary(model_3))
 
 
 #anova(model_1, model_2)
 #Model_1 has a Residual Sum of Squares (RSS) of 11.554 (A model with a smaller RSS indicates a better fit).
 #Model_2 has an RSS of 30.433. 
 #The p-value is 9.395e-06 <= 0.05 which indicates that the fit of Model_1 is statistically significantly different from that of Model_2.
-
-print(summary(model_3))
