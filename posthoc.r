@@ -1,7 +1,7 @@
 # Load required library
 library(stats)
 library(psych)
-dataset <- read.csv("data/software_cost_projects.csv", header = TRUE)
+dataset <- read.csv("data/modified_software_cost_projects.csv", header = TRUE)
 dataset$ln_effort <- log(dataset$effort)
 
 anova_result <- aov(log(effort) ~ t01, data = dataset)
@@ -39,24 +39,12 @@ tukey_result <- TukeyHSD(anova_result)
 
 print(tukey_result)
 
-"  
-Tukey multiple comparisons of means
-    95% family-wise confidence level
-
-Fit: aov(formula = log(effort) ~ t01, data = dataset)
-
+"
 $t01
-                         diff       lwr         upr     p adj
-low-high           -0.6204166 -1.496217  0.25538366 0.2816174
-medium-high        -0.9400253 -1.846012 -0.03403891 0.0383097 #
-very high-high     -0.7703225 -2.478667  0.93802195 0.7106526
-very low-high      -1.0739368 -2.782281  0.63440763 0.4007217
-medium-low         -0.3196088 -1.275826  0.63660835 0.8796268
-very high-low      -0.1499059 -1.885412  1.58559992 0.9992040
-very low-low       -0.4535202 -2.189026  1.28198560 0.9472116
-very high-medium    0.1697029 -1.581230  1.92063570 0.9987477
-very low-medium    -0.1339114 -1.884844  1.61702139 0.9995077
-very low-very high -0.3036143 -2.575925  1.96869616 0.9956241
+                  diff       lwr        upr     p adj
+low-high    -0.5963218 -1.294177  0.1015336 0.1084088
+medium-high -0.8511420 -1.606914 -0.0953699 0.0236836 #
+medium-low  -0.2548202 -1.044124  0.5344834 0.7191895
 
   Tukey multiple comparisons of means
     95% family-wise confidence level
@@ -64,17 +52,10 @@ very low-very high -0.3036143 -2.575925  1.96869616 0.9956241
 Fit: aov(formula = log(effort) ~ t07, data = dataset)
 
 $t07
-                         diff         lwr        upr     p adj
-low-high           -1.3696992 -2.26969725 -0.4697012 0.0006462 #
-medium-high        -0.5165066 -1.25673540  0.2237223 0.2961403
-very high-high      0.4786991 -0.88446895  1.8418671 0.8593481
-very low-high      -2.1273108 -4.69153875  0.4369172 0.1484785
-medium-low          0.8531927 -0.03347128  1.7398567 0.0647484
-very high-low       1.8483983  0.40048212  3.2963145 0.0058383 #
-very low-low       -0.7576115 -3.36787960  1.8526565 0.9243041
-very high-medium    0.9952056 -0.35919595  2.3496072 0.2475293
-very low-medium    -1.6108042 -4.17038264  0.9487742 0.3996117
-very low-very high -2.6060099 -5.40988753  0.1978678 0.0804400
+                  diff        lwr         upr     p adj
+low-high    -1.5016231 -2.2266212 -0.77662496 0.0000170 #
+medium-high -0.5901526 -1.1943177  0.01401253 0.0569340
+medium-low   0.9114705  0.1764719  1.64646905 0.0114149 #
 
   Tukey multiple comparisons of means
     95% family-wise confidence level
@@ -124,17 +105,10 @@ very high-medium  0.9235668 -0.07014561 1.9172793 0.0775314
 Fit: aov(formula = log(effort) ~ t14, data = dataset)
 
 $t14
-                         diff         lwr       upr     p adj
-low-high            0.9086661 -0.06862825 1.8859605 0.0802589
-medium-high         0.2455226 -0.61971335 1.1107585 0.9298792
-very high-high     -0.2873601 -1.49597407 0.9212538 0.9621858
-very low-high       1.2325928 -0.81671183 3.2818975 0.4459708
-medium-low         -0.6631435 -1.64973545 0.3234484 0.3329090
-very high-low      -1.1960262 -2.49428586 0.1022334 0.0848111
-very low-low        0.3239267 -1.77949429 2.4273477 0.9924522
-very high-medium   -0.5328827 -1.74902700 0.6832616 0.7318961
-very low-medium     0.9870703 -1.06668456 3.0408251 0.6595101
-very low-very high  1.5199529 -0.70041265 3.7403185 0.3148034
+                  diff        lwr        upr     p adj
+low-high     1.0236964  0.2759915 1.77140125 0.0047144 #
+medium-high  0.3173626 -0.3667810 1.00150615 0.5087811
+medium-low  -0.7063338 -1.5045013 0.09183372 0.0929628
 
   Tukey multiple comparisons of means
     95% family-wise confidence level

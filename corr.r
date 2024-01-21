@@ -1,13 +1,19 @@
 library(ggplot2)
 # Load the dataset
-dataset <- read.csv("data/software_cost_projects.csv", header = TRUE)
+dataset <- read.csv("data/modified_software_cost_projects.csv", header = TRUE)
 
 dataset$ln_effort <- log(dataset$effort)
 #ggplot(dataset, aes(x=nlan, y=ln_effort))+ geom_point()+ labs(x='# langs', y='# effort')
 
 res <- cor.test(y = dataset$ln_effort,
-                x = dataset$nlan,
+                x = log(dataset$nlan),
                 method = "spearman")
+print(res)
+
+res <- cor.test(y=dataset$ln_effort,
+         x=log(dataset$size),
+         method="pearson")
+print(res)
 
 #         Spearman's rank correlation rho
 
@@ -17,12 +23,6 @@ res <- cor.test(y = dataset$ln_effort,
 #sample estimates:
 #      rho 
 #0.3067786 
-
-res <- cor.test(y=dataset$ln_effort,
-         x=log(dataset$size),
-         method="pearson")
-
-print(res)
 
 #Pearson's product-moment correlation
 
