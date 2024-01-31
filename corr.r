@@ -15,7 +15,7 @@ res <- cor.test(y=dataset$ln_effort,
          method="pearson")
 print(res)
 
-#         Spearman's rank correlation rho
+# Spearman's rank correlation rho
 
 #data:  dataset$nlan and dataset$ln_effort
 #S = 28882, p-value = 0.01447

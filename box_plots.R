@@ -1,5 +1,5 @@
 # Read the dataset from CSV file
-dataset <- read.csv("data/software_cost_projects.csv", header = TRUE)
+dataset <- read.csv("data/modified_software_cost_projects.csv", header = TRUE)
 
 # Specify the levels for the factor variable
 factor_levels <- c("low", "medium", "high")
