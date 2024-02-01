@@ -1,9 +1,11 @@
-dataset <- read.csv("data/modified_software_cost_projects.csv", header = TRUE)
-
 library(tidyverse)
 library(caret)
 library(leaps)
 library(MASS)
+
+set.seed(123) 
+
+dataset <- read.csv("data/modified_software_cost_projects.csv", header = TRUE)
 
 intercept_only <- lm(log(effort) ~ 1, data = dataset)
 
@@ -26,7 +28,43 @@ model <- lm(log(effort) ~ log(size)
                 data = dataset)
 
 print(summary(model))
-print(anova(all_pred, model))
+#print(plot(model,1))
+#print(plot(model,2))
+#print(plot(model,3))
+
+trainIndex <- createDataPartition(dataset$effort, p = .7,
+                                    list = FALSE, times = 1)
+
+train <- dataset[trainIndex, ]
+test <- dataset[-trainIndex, ]
+
+model_training <- lm(log(effort) ~ log(size) + t14 + t08 + t11,
+                data = train)
+
+# Predicted values for Test Set
+predicted <- exp(predict (model_training, test))
+actual <- test$effort
+# Error loss function
+# actual-predicted
+Error.vector <- actual - predicted
+# Absolute Error loss function
+#| actual-predicted|
+AE.vector <- abs(actual - predicted)
+# Magnitude of Relative Error loss function
+# lactual-predicted|/actual|
+MRE.vector <- (abs(actual - predicted))/actual
+# Magnitude of Relative Error to the Estimate loss 1
+# lactual-predicted|/predicted
+MER.vector <- (abs (actual - predicted))/predicted
+# Central Tendency measures for loss functions
+print(list(ME = mean(Error.vector),
+Mde = median(Error.vector),
+MAE = mean(AE.vector),
+MdAE = median(AE.vector),
+MMRE = mean(MRE.vector),
+MdMRE = median(MRE.vector),
+MMER = mean(MER.vector),
+MdMER = median(MER.vector)))
 "
 # forward
          Step Df  Deviance Resid. Df Resid. Dev        AIC1
