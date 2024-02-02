@@ -44,19 +44,11 @@ model_training <- lm(log(effort) ~ log(size) + t14 + t08 + t11,
 # Predicted values for Test Set
 predicted <- exp(predict (model_training, test))
 actual <- test$effort
-# Error loss function
-# actual-predicted
 Error.vector <- actual - predicted
-# Absolute Error loss function
-#| actual-predicted|
 AE.vector <- abs(actual - predicted)
-# Magnitude of Relative Error loss function
-# lactual-predicted|/actual|
 MRE.vector <- (abs(actual - predicted))/actual
-# Magnitude of Relative Error to the Estimate loss 1
-# lactual-predicted|/predicted
 MER.vector <- (abs (actual - predicted))/predicted
-# Central Tendency measures for loss functions
+
 print(list(ME = mean(Error.vector),
 Mde = median(Error.vector),
 MAE = mean(AE.vector),
@@ -65,6 +57,13 @@ MMRE = mean(MRE.vector),
 MdMRE = median(MRE.vector),
 MMER = mean(MER.vector),
 MdMER = median(MER.vector)))
+
+model_1 <- lm(log(effort) ~ log(size) + t01 + t07 
+              + t08 + t10 + t11 + t14 
+              + har, data = dataset)
+
+print(anova(model_1, model))
+
 "
 # forward
          Step Df  Deviance Resid. Df Resid. Dev        AIC1

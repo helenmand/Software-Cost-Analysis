@@ -2,6 +2,7 @@
 dataset <- read.csv("data/modified_software_cost_projects.csv", header = TRUE)
 dataset$effort <- log(dataset$effort)
 dataset$size <- log(dataset$size)
+
 dataset$t01 <- factor(dataset$t01, levels = c("low", "medium", "high"))
 dataset$t02 <- factor(dataset$t02, levels = c("low", "medium", "high"))
 dataset$t03 <- factor(dataset$t03, levels = c("low", "medium", "high"))
@@ -45,7 +46,7 @@ model_1 <- lm(effort ~ size + t01 + t07
 #will result in a 0.67412-unit increase in the dependent variable log(effort).
 
 # Display a summary of the regression results
-#print(summary(model_1))
+print(summary(model_1))
 
 model_2 <- lm(effort ~ t01 + t07 + t08 + t10 + har, data = dataset)
 
@@ -62,7 +63,8 @@ model_3 <- lm(effort ~ size + t01 + t02 + t03
 print(summary(model_3))
 
 
-print(anova(model_1, model_2))
+print(anova(model_3, model_1))
+print(anova(model_2, model_1))
 #Model_1 has a Residual Sum of Squares (RSS) of 11.554 (A model with a smaller RSS indicates a better fit).
 #Model_2 has an RSS of 30.433. 
 #The p-value is 9.395e-06 <= 0.05 which indicates that the fit of Model_1 is statistically significantly different from that of Model_2.
